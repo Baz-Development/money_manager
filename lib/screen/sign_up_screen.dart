@@ -38,13 +38,15 @@ class _SignUpScreenState extends State<SignUpScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromRGBO(18, 20, 29, 1),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 150,
-              child: HeaderWidget(150, false, "assets/splash.png"),
+              child: HeaderWidget(150, false, "assets/splash.png", true, onTap: () {
+                Navigator.pop(context);
+              }),
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
@@ -57,9 +59,10 @@ class _SignUpScreenState extends State<SignUpScreen>{
                     child: Column(
                       children: [
                         const Text(
-                          "Sign In",
+                          "Sign Up",
                            style: TextStyle(
-                             fontSize: 50
+                             fontSize: 50,
+                             color: Colors.grey
                            ),
                         ),
                         const SizedBox(height: 30),
@@ -134,6 +137,10 @@ class _SignUpScreenState extends State<SignUpScreen>{
                                   children: <Widget>[
                                     Checkbox(
                                       value: checkboxValue,
+                                      side: const BorderSide(
+                                        color: Colors.grey, //your desire colour here
+                                        width: 1.5,
+                                      ),
                                       onChanged: (value) {
                                         setState(() {
                                           checkboxValue = value!;
@@ -207,71 +214,6 @@ class _SignUpScreenState extends State<SignUpScreen>{
                               }
                             },
                           ),
-                        ),
-                        const SizedBox(height: 30.0),
-                        const Text("Or create account using social media",  style: TextStyle(color: Colors.grey)),
-                        const SizedBox(height: 25.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              child: FaIcon(
-                                FontAwesomeIcons.googlePlus, size: 35,
-                                color: HexColor("#EC2D2F"),),
-                              onTap: () {
-                                setState(() {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.", context);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                            const SizedBox(width: 30.0,),
-                            GestureDetector(
-                              child: Container(
-                                padding: const EdgeInsets.all(0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(width: 5, color: HexColor("#40ABF0")),
-                                  color: HexColor("#40ABF0"),
-                                ),
-                                child: FaIcon(
-                                  FontAwesomeIcons.twitter, size: 23,
-                                  color: HexColor("#FFFFFF"),),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Twitter","You tap on Twitter social icon.",context);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                            const SizedBox(width: 30.0,),
-                            GestureDetector(
-                              child: FaIcon(
-                                FontAwesomeIcons.facebook, size: 35,
-                                color: HexColor("#3E529C"),),
-                              onTap: () {
-                                setState(() {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Facebook",
-                                          "You tap on Facebook social icon.",
-                                          context);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                          ],
                         ),
                       ],
                     ),

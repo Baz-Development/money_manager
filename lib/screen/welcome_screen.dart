@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:money_manager/common/theme_helper.dart';
 import 'package:money_manager/screen/sign_in_screen.dart';
 import 'package:money_manager/screen/sign_up_screen.dart';
 import 'package:money_manager/widgets/header_widget.dart';
@@ -17,16 +20,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(18, 20, 29, 1),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: _headerHeight,
-            child: HeaderWidget(_headerHeight, true, "assets/splash.png"),
-          ),
-          Expanded(
-            flex: 6,
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true, "assets/splash.png", false, onTap: () {
+                Navigator.pop(context);
+              }),
+            ),
+            Padding(
               padding: const EdgeInsets.only(top: 60, left: 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,17 +40,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ],
               ),
             ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Column(
+            const SizedBox(
+              height: 200,
+            ),
+            Column(
               children: [
                 Container(
                   height: 80,
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
                   child: ElevatedButton(
-                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignInScreen())),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInScreen())),
                     child: const Text(
                       'Log In',
                       style: TextStyle(
@@ -62,7 +66,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
                   child: ElevatedButton(
-                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignUpScreen())),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpScreen())),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.white)
                     ),
@@ -76,10 +80,75 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
+                const Text("Or create account using social media",  style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 25.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      child: const FaIcon(
+                          FontAwesomeIcons.apple,
+                          size: 35,
+                          color: Colors.white
+                      ),
+                      onTap: () {
+                        setState(() {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.", context);
+                            },
+                          );
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 30.0),
+                    GestureDetector(
+                      child: FaIcon(
+                        FontAwesomeIcons.google,
+                        size: 35,
+                        color: HexColor("#EC2D2F"),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.", context);
+                            },
+                          );
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 30.0),
+                    GestureDetector(
+                      child: FaIcon(
+                          FontAwesomeIcons.facebook,
+                          size: 35,
+                          color: HexColor("#3E529C")
+                      ),
+                      onTap: () {
+                        setState(() {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ThemeHelper().alartDialog("Facebook",
+                                  "You tap on Facebook social icon.",
+                                  context);
+                            },
+                          );
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

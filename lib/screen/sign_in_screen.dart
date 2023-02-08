@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:money_manager/common/theme_helper.dart';
+import 'package:money_manager/screen/forget_password_screen.dart';
 import 'package:money_manager/screen/home_screen.dart';
 import 'package:money_manager/screen/sign_up_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
@@ -24,13 +25,15 @@ class _SignInScreenState extends State<SignInScreen>{
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromRGBO(18, 20, 29, 1),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
               height: _headerHeight,
-              child: HeaderWidget(_headerHeight, true, "assets/splash.png"), //let's create a common header widget
+              child: HeaderWidget(_headerHeight, true, "assets/splash.png", true, onTap: () {
+                Navigator.pop(context);
+              }), //let's create a common header widget
             ),
             SafeArea(
               child: Container(
@@ -40,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen>{
                     children: [
                       const Text(
                         'Hello',
-                        style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.grey),
                       ),
                       const Text(
                         'Signin into your account',
@@ -74,6 +77,7 @@ class _SignInScreenState extends State<SignInScreen>{
                               child: GestureDetector(
                                 onTap: () {
                                   debugPrint("forget password");
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ForgetPasswordScreen()));
                                 },
                                 child: const Text( "Forgot your password?", style: TextStyle( color: Colors.grey, ),
                                 ),
@@ -100,9 +104,14 @@ class _SignInScreenState extends State<SignInScreen>{
                               child: Text.rich(
                                 TextSpan(
                                   children: [
-                                    const TextSpan(text: "Don't have an account? "),
+                                    const TextSpan(
+                                      text: "Don't have an account?",
+                                      style: TextStyle(
+                                        color: Colors.grey
+                                      )
+                                    ),
                                     TextSpan(
-                                      text: 'Create',
+                                      text: ' Create',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = (){
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpScreen()));
