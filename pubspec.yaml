@@ -42,6 +42,9 @@ dependencies:
   flutter_native_splash: ^2.2.17
   shared_preferences: ^2.0.17
   fluttertoast: ^8.1.2
+  hexcolor: ^3.0.1
+  font_awesome_flutter: ^10.3.0
+  flutter_profile_picture: ^2.0.0
 
 
 dev_dependencies:

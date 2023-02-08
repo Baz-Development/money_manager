@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/screen/sign_in_screen.dart';
+import 'package:money_manager/screen/sign_up_screen.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -44,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
                   child: ElevatedButton(
-                    onPressed: () => debugPrint("press"),
+                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignInScreen())),
                     child: const Text(
                       'Log In',
                       style: TextStyle(
@@ -60,7 +62,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
                   child: ElevatedButton(
-                    onPressed: () => debugPrint("press"),
+                    onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpScreen())),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.white)
                     ),

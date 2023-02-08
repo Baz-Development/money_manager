@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: const Color.fromRGBO(18, 20, 29, 1)
       ),
       debugShowCheckedModeBanner: false,
-      home: _active ? const HomeScreen() : const OnboardingScreen(),
+      home: _active ? const WelcomeScreen() : const OnboardingScreen(),
     );
   }
 
