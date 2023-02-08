@@ -58,9 +58,11 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+# Run this command to create splash screen
+# flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
 flutter_native_splash:
-  color: "#42a5f5"
   image: assets/splash.png
+  background_image: "assets/background_image.png"
 
 
 # The following section is specific to Flutter packages.
