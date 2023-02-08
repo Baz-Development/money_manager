@@ -4,7 +4,7 @@ class CustomButton extends StatelessWidget {
   final String titulo;
   final void Function() irParaPaginaInicial;
 
-  const CustomButton({required this.titulo, required this.irParaPaginaInicial});
+  const CustomButton({super.key, required this.titulo, required this.irParaPaginaInicial});
 
   @override
   Widget build(BuildContext context) {

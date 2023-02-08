@@ -4,10 +4,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:money_manager/common/theme_helper.dart';
 import 'package:money_manager/screen/home_screen.dart';
+import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
 
 class SignUpScreen extends  StatefulWidget{
+  const SignUpScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _SignUpScreenState();
@@ -82,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                             decoration: ThemeHelper().textInputDecoration("E-mail address", "Enter your email"),
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
-                              if(!(val!.isEmpty) && !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(val)){
+                              if(val!.isNotEmpty && !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(val)){
                                 return "Enter a valid email address";
                               }
                               return null;
@@ -99,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                                 "Enter your mobile number"),
                             keyboardType: TextInputType.phone,
                             validator: (val) {
-                              if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
+                              if(val!.isNotEmpty && !RegExp(r"^(\d+)*$").hasMatch(val)){
                                 return "Enter a valid phone number";
                               }
                               return null;
@@ -198,12 +201,9 @@ class _SignUpScreenState extends State<SignUpScreen>{
                             ),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => const HomeScreen()
-                                    ),
-                                        (Route<dynamic> route) => false
-                                );
+                                var email = emailController.text;
+                                var password = passwordController.text;
+                                signUpWithFirebaseBaseEmail(email, password);
                               }
                             },
                           ),
@@ -283,5 +283,17 @@ class _SignUpScreenState extends State<SignUpScreen>{
         ),
       ),
     );
+  }
+
+  void signUpWithFirebaseBaseEmail(String email, String password) {
+    createUser(email, password).then((value) {
+      debugPrint("user created");
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => const HomeScreen()
+          ),
+              (Route<dynamic> route) => false
+      );
+    });
   }
 }

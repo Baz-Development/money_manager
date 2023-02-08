@@ -4,7 +4,7 @@ class CustomLink extends StatelessWidget {
   final String titulo;
   final void Function() irParaPaginaInicial;
 
-  const CustomLink({required this.titulo, required this.irParaPaginaInicial});
+  const CustomLink({super.key, required this.titulo, required this.irParaPaginaInicial});
 
   @override
   Widget build(BuildContext context) {
