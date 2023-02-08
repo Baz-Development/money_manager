@@ -209,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           ),
                         ),
                         const SizedBox(height: 30.0),
-                        const Text("Or create account using social media",  style: TextStyle(color: Colors.grey),),
+                        const Text("Or create account using social media",  style: TextStyle(color: Colors.grey)),
                         const SizedBox(height: 25.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -223,7 +223,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.",context);
+                                      return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.", context);
                                     },
                                   );
                                 });
