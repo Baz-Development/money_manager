@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Money Manager',
       theme: ThemeData(
-        primarySwatch: Colors.blue
+        backgroundColor: const Color.fromRGBO(18, 20, 29, 1)
       ),
       debugShowCheckedModeBanner: false,
       home: _active ? const HomeScreen() : const OnboardingScreen(),

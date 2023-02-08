@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Color.fromRGBO(18, 20, 29, 1),
       body: Center(
         child: Text(
-            'Home Page',
+          'Welcome Page',
           style: TextStyle(
-            color: Color.fromRGBO(224, 224, 224, 1)
+              color: Color.fromRGBO(224, 224, 224, 1)
           ),
         ),
       ),

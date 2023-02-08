@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/screen/home_screen.dart';
+import 'package:money_manager/screen/welcome_screen.dart';
 import 'package:money_manager/widgets/custom_button.dart';
 import 'package:money_manager/widgets/custom_link.dart';
 import 'package:money_manager/widgets/custom_paginator.dart';
@@ -94,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void irParaPaginaInicial() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
 
     _setEstado();
   }
