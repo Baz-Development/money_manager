@@ -60,8 +60,8 @@ dev_dependencies:
 # Run this command to create splash screen
 # flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
 flutter_native_splash:
-  color: "#42a5f5"
   image: assets/splash.png
+  background_image: "assets/background_image.png"
 
 
 # The following section is specific to Flutter packages.
@@ -73,9 +73,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+   - assets/onboarding_1.png
+   - assets/onboarding_2.png
+   - assets/onboarding_3.png
+   - assets/background_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

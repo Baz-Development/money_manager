@@ -10,9 +10,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Home Page'),
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/background_image.png"),
+              fit: BoxFit.cover
+          ),
+        ),
+        child: const Center(
+          child: Text(
+              'Home Page',
+            style: TextStyle(
+              color: Color.fromRGBO(224, 224, 224, 1)
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -33,20 +33,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             physics: const ClampingScrollPhysics(),
             children: [
               CustomSlider(
-                imagem: 'assets/onboarding-image-1.png',
+                imagem: 'assets/onboarding_1.png',
                 titulo: 'Sua Comida favorita',
                 texto: 'Almoço, janta, cafézinho da manhã ou da tarde. A qual quer horário para atendimento.',
+                backgroundImage: "assets/background_image.png",
               ),
               CustomSlider(
-                imagem: 'assets/onboarding-image-2.png',
+                imagem: 'assets/onboarding_2.png',
                 titulo: 'Você recebe no conforto de onde estiver',
                 texto: 'Seu pedido é atendido pelo restaurante mais próximo, que leva tudo pra você.',
+                backgroundImage: "assets/background_image.png",
               ),
               CustomSlider(
-                imagem: 'assets/onboarding-image-3.png',
+                imagem: 'assets/onboarding_3.png',
                 titulo: 'Melhores Chef’s',
                 texto:
                 'Chefs, dos quais a maioria vem de restaurantes com estrelas Michelin ou são vencedores de competições de prestígio e títulos.',
+                backgroundImage: "assets/background_image.png",
               ),
             ],
           ),
@@ -91,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void irParaPaginaInicial() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
 
     _setEstado();
   }
