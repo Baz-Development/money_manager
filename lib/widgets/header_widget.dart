@@ -143,7 +143,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   debugPrint("close clicked");
                   _onTap();
                 },
-                icon: const Icon( Icons.close_rounded)
+                icon: const Icon( Icons.arrow_back_ios_new)
               )
             ),
           ),

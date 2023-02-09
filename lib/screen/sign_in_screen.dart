@@ -1,11 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:money_manager/common/theme_helper.dart';
+import 'package:money_manager/exceptions/FirebaseCustomException.dart';
 import 'package:money_manager/screen/forget_password_screen.dart';
 import 'package:money_manager/screen/home_screen.dart';
 import 'package:money_manager/screen/sign_up_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
+
+import '../repository/firebase_user_repository.dart';
 
 class SignInScreen extends StatefulWidget{
   const SignInScreen({Key? key}): super(key:key);
@@ -135,10 +138,37 @@ class _SignInScreenState extends State<SignInScreen>{
     );
   }
 
-  void signInWithFirebaseBaseEmail(String email, String password) {
-    signInFirebaseEmail(email, password).then((value) {
+  Future<void> signInWithFirebaseBaseEmail(String email, String password) async {
+    if(email.isEmpty || password.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ThemeHelper().alartDialog("Dados invalídos", "Informe o email e senha para realizar o login.", context);
+        },
+      );
+      return;
+    }
+    try {
+      var userId = await signInFirebaseEmail(email, password);
+      if( userId == null) {
+        return;
+      }
+      await getUser(userId);
       debugPrint("user logged");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-    });
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => const HomeScreen()
+          ),
+              (Route<dynamic> route) => false
+      );
+    } on FirebaseCustomException catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ThemeHelper().alartDialog("Ops", e.cause, context);
+        },
+      );
+    }
+
   }
 }

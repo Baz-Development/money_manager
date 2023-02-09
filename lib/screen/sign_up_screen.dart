@@ -3,6 +3,9 @@ import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:money_manager/common/theme_helper.dart';
+import 'package:money_manager/exceptions/FirebaseCustomException.dart';
+import 'package:money_manager/models/user_model.dart';
+import 'package:money_manager/repository/firebase_user_repository.dart';
 import 'package:money_manager/screen/home_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
@@ -209,8 +212,11 @@ class _SignUpScreenState extends State<SignUpScreen>{
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 var email = emailController.text;
+                                var fullname = fullNameController.text;
+                                var phoneNumber = phoneController.text;
+
                                 var password = passwordController.text;
-                                signUpWithFirebaseBaseEmail(email, password);
+                                signUpWithFirebaseBaseEmail(email, fullname, phoneNumber, password);
                               }
                             },
                           ),
@@ -227,15 +233,42 @@ class _SignUpScreenState extends State<SignUpScreen>{
     );
   }
 
-  void signUpWithFirebaseBaseEmail(String email, String password) {
-    createUser(email, password).then((value) {
+  void createUserInDB(String email, String fullname, String phoneNumber, String userId) async {
+    var user = User(fullname, phoneNumber, email, userId);
+    await createUser(user);
+  }
+
+  Future<void> signUpWithFirebaseBaseEmail(String email,String fullname,String phoneNumber, String password) async {
+    if(email.isEmpty || password.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ThemeHelper().alartDialog("Dados invalídos", "Informe o email e senha para realizar o cadastro.", context);
+        },
+      );
+      return;
+    }
+    try {
+      var userId = await registerUser(email, password);
+      if(userId == null) {
+        return;
+      }
       debugPrint("user created");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
               builder: (context) => const HomeScreen()
           ),
-              (Route<dynamic> route) => false
+          (Route<dynamic> route) => false
       );
-    });
+      createUserInDB(email, fullname, phoneNumber, userId);
+    } on FirebaseCustomException catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ThemeHelper().alartDialog("Ops", e.cause, context);
+        },
+      );
+    }
+
   }
 }
