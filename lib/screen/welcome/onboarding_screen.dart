@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/screen/welcome_screen.dart';
+import 'package:money_manager/screen/welcome/welcome_screen.dart';
 import 'package:money_manager/widgets/custom_button.dart';
 import 'package:money_manager/widgets/custom_link.dart';
 import 'package:money_manager/widgets/custom_paginator.dart';

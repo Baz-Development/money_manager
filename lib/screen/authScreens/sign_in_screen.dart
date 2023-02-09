@@ -2,13 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:money_manager/common/theme_helper.dart';
 import 'package:money_manager/exceptions/FirebaseCustomException.dart';
-import 'package:money_manager/screen/forget_password_screen.dart';
+import 'package:money_manager/screen/authScreens/forget_password_screen.dart';
 import 'package:money_manager/screen/home_screen.dart';
-import 'package:money_manager/screen/sign_up_screen.dart';
+import 'package:money_manager/screen/authScreens/sign_up_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
-import '../repository/firebase_user_repository.dart';
+import '../../repository/firebase_user_repository.dart';
 
 class SignInScreen extends StatefulWidget{
   const SignInScreen({Key? key}): super(key:key);

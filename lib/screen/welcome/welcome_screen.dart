@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:money_manager/common/theme_helper.dart';
-import 'package:money_manager/screen/sign_in_screen.dart';
-import 'package:money_manager/screen/sign_up_screen.dart';
+import 'package:money_manager/screen/authScreens/sign_in_screen.dart';
+import 'package:money_manager/screen/authScreens/sign_up_screen.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
