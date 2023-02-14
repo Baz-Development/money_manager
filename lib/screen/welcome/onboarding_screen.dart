@@ -33,22 +33,50 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             physics: const ClampingScrollPhysics(),
             children: [
               CustomSlider(
-                imagem: 'assets/onboarding_1.png',
-                titulo: 'Sua Comida favorita',
-                texto: 'Almoço, janta, cafézinho da manhã ou da tarde. A qual quer horário para atendimento.',
+                image: 'assets/onboarding_1.png',
+                title: 'Gerenciar suas finanças nunca foi tão fácil',
+                titleStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromRGBO(224, 224, 224, 1)
+                ),
+                text: 'Controle seus investimentos e gastos de forma rápida e fácil,\n além de contar com diversas ferramentas de análise de custos e rendimentos',
+
+                textStyle: const TextStyle(
+                    fontSize: 12,
+                    color:  Color.fromRGBO(224, 224, 224, 1)
+                ),
                 backgroundImage: "assets/background_image.png",
               ),
               CustomSlider(
-                imagem: 'assets/onboarding_2.png',
-                titulo: 'Você recebe no conforto de onde estiver',
-                texto: 'Seu pedido é atendido pelo restaurante mais próximo, que leva tudo pra você.',
+                image: 'assets/onboarding_2.png',
+                title: 'Acompanhe e gerencie seu dinheiro\n a qualquer hora, em qualquer lugar e sem complicações',
+                titleStyle: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromRGBO(224, 224, 224, 1)
+                ),
+                text: 'Apenas com seu celular, é possível acompanhar e gerenciar\n todos seus gastos de uma maneira rápida e eficiente',
+                textStyle: const TextStyle(
+                    fontSize: 12,
+                    color:  Color.fromRGBO(224, 224, 224, 1)
+                ),
                 backgroundImage: "assets/background_image.png",
               ),
               CustomSlider(
-                imagem: 'assets/onboarding_3.png',
-                titulo: 'Melhores Chef’s',
-                texto:
-                'Chefs, dos quais a maioria vem de restaurantes com estrelas Michelin ou são vencedores de competições de prestígio e títulos.',
+                image: 'assets/onboarding_3.png',
+                title: 'Defina objetivos e alcance eles',
+                titleStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromRGBO(224, 224, 224, 1)
+                ),
+                text:
+                'Com uso das ferramentas de gerenciamento de gastos e investimentos, é possível criar planos para alcançar suas metas e objetivos de forma fácil e dinâmica',
+                textStyle: const TextStyle(
+                    fontSize: 12,
+                    color:  Color.fromRGBO(224, 224, 224, 1)
+                ),
                 backgroundImage: "assets/background_image.png",
               ),
             ],
@@ -56,11 +84,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 100.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CustomButton(
-                  titulo: _currentPage == 2 ? 'QUERO CONHECER' : 'CONTINUAR',
+                  title: 'VOLTAR',
+                  irParaPaginaInicial: voltarCard,
+                  borderColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
+                  isUserInteractive: _currentPage != 0,
+                ),
+                CustomButton(
+                  title: _currentPage == 2 ? 'QUERO CONHECER' : 'CONTINUAR',
                   irParaPaginaInicial: _currentPage == 2 ? irParaPaginaInicial : proximoCard,
+                  borderColor: Colors.deepPurple,
+                  backgroundColor: Colors.blueAccent,
+                  isUserInteractive: true,
                 ),
               ],
             ),
@@ -101,6 +139,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void proximoCard() {
     _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeIn);
+  }
+
+  void voltarCard() {
+    _pageController.previousPage(duration: const Duration(seconds: 1), curve: Curves.easeIn);
   }
 
   _setEstado() async {
