@@ -6,7 +6,7 @@ import 'package:money_manager/common/theme_helper.dart';
 import 'package:money_manager/exceptions/FirebaseCustomException.dart';
 import 'package:money_manager/models/user_model.dart';
 import 'package:money_manager/repository/firebase_user_repository.dart';
-import 'package:money_manager/screen/home_screen.dart';
+import 'package:money_manager/screen/home/home_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
