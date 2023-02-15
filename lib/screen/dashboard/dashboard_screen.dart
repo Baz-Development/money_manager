@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/widgets/custom_card_amount.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -9,12 +10,13 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen>{
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Dashboard Page',
-      style: TextStyle(
-          color: Color.fromRGBO(224, 224, 224, 1)
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: const [
+          CustomCardAmount(width: 300, height: 100, color: Colors.black26)
+        ],
       ),
     );
   }
-  
 }
