@@ -4,14 +4,15 @@ class CustomCardAmount extends StatelessWidget {
   final double? width;
   final double? height;
   final Color color;
+  final Function() function;
 
-  const CustomCardAmount({super.key, required this.width, required this.height, required this.color});
+  const CustomCardAmount({super.key, required this.width, required this.height, required this.color, required this.function});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        debugPrint("you balance clicked");
+        function();
       },
       child: Container(
         margin: const EdgeInsets.only(left: 10, top: 10, right: 10),
