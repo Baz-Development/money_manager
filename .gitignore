@@ -31,3 +31,5 @@ doc/api/
 .idea/libraries/Flutter_Plugins.xml
 .idea/libraries/Dart_Packages.xml
 .idea/libraries/Flutter_Plugins.xml
+firebase-debug.log
+key1.jks
