@@ -40,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     fontWeight: FontWeight.w400,
                     color: Color.fromRGBO(224, 224, 224, 1)
                 ),
-                text: 'Controle seus investimentos e gastos de forma rápida e fácil,\n além de contar com diversas ferramentas de análise de custos e rendimentos',
+                text: 'Controle seus investimentos e gastos de forma rápida e fácil, além de contar com diversas ferramentas de análise de custos e rendimentos',
 
                 textStyle: const TextStyle(
                     fontSize: 12,
@@ -50,13 +50,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               CustomSlider(
                 image: 'assets/onboarding_2.png',
-                title: 'Acompanhe e gerencie seu dinheiro\n a qualquer hora, em qualquer lugar e sem complicações',
+                title: 'Acompanhe e gerencie seu dinheiro a qualquer hora, em qualquer lugar e sem complicações',
                 titleStyle: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromRGBO(224, 224, 224, 1)
                 ),
-                text: 'Apenas com seu celular, é possível acompanhar e gerenciar\n todos seus gastos de uma maneira rápida e eficiente',
+                text: 'Apenas com seu celular, é possível acompanhar e gerenciar todos seus gastos de uma maneira rápida e eficiente',
                 textStyle: const TextStyle(
                     fontSize: 12,
                     color:  Color.fromRGBO(224, 224, 224, 1)
@@ -87,14 +87,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CustomButton(
-                  title: 'VOLTAR',
+                  title: 'Voltar',
                   irParaPaginaInicial: voltarCard,
-                  borderColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
+                  borderColor: Colors.black12,
+                  backgroundColor: Colors.black38,
                   isUserInteractive: _currentPage != 0,
                 ),
                 CustomButton(
-                  title: _currentPage == 2 ? 'QUERO CONHECER' : 'CONTINUAR',
+                  title: _currentPage == 2 ? 'Quero conhecer' : 'Continuar',
                   irParaPaginaInicial: _currentPage == 2 ? irParaPaginaInicial : proximoCard,
                   borderColor: Colors.deepPurple,
                   backgroundColor: Colors.blueAccent,

@@ -22,25 +22,22 @@ class CustomSlider extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 100),
+          const SizedBox(height: 50),
           Image.asset(
             image,
             width: 300,
             height: 250,
           ),
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: titleStyle,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: titleStyle
+            ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 64.0),
             child: Text(
@@ -49,7 +46,6 @@ class CustomSlider extends StatelessWidget {
               style: textStyle
             ),
           ),
-          const SizedBox(height: 32),
         ],
       ),
     );

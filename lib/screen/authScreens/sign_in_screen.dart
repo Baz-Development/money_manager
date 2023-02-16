@@ -41,15 +41,15 @@ class _SignInScreenState extends State<SignInScreen>{
             SafeArea(
               child: Container(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),// This will be the login form
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),// This wiLogin into your accountll be the login form
                   child: Column(
                     children: [
                       const Text(
-                        'Hello',
+                        'olá',
                         style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.grey),
                       ),
                       const Text(
-                        'Signin into your account',
+                        'Entre na sua conta',
                         style: TextStyle(color: Colors.grey),
                       ),
                       const SizedBox(height: 30.0),
@@ -61,7 +61,7 @@ class _SignInScreenState extends State<SignInScreen>{
                               decoration: ThemeHelper().inputBoxDecorationShaddow(),
                               child: TextField(
                                 controller: emailController,
-                                decoration: ThemeHelper().textInputDecoration('Email', 'Enter your email'),
+                                decoration: ThemeHelper().textInputDecoration('Email', 'Insira o email'),
                               ),
                             ),
                             const SizedBox(height: 30.0),
@@ -70,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen>{
                               child: TextField(
                                 controller: passwordController,
                                 obscureText: true,
-                                decoration: ThemeHelper().textInputDecoration('Password', 'Enter your password'),
+                                decoration: ThemeHelper().textInputDecoration('Senha', 'Insira a senha'),
                               ),
                             ),
                             const SizedBox(height: 15.0),
@@ -82,17 +82,17 @@ class _SignInScreenState extends State<SignInScreen>{
                                   debugPrint("forget password");
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ForgetPasswordScreen()));
                                 },
-                                child: const Text( "Forgot your password?", style: TextStyle( color: Colors.grey, ),
+                                child: const Text( "Esqueceu sua senha?", style: TextStyle( color: Colors.grey, ),
                                 ),
                               ),
                             ),
-                            Container(
-                              decoration: ThemeHelper().buttonBoxDecoration(context),
+                            SizedBox(
+                              height: 50,
+                              width: double.infinity,
                               child: ElevatedButton(
-                                style: ThemeHelper().buttonStyle(),
                                 child: Padding(
                                   padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                  child: Text('Sign In'.toUpperCase(), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
+                                  child: Text('Entrar'.toUpperCase(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
                                 ),
                                 onPressed: (){
                                   var email = emailController.text;
@@ -108,13 +108,13 @@ class _SignInScreenState extends State<SignInScreen>{
                                 TextSpan(
                                   children: [
                                     const TextSpan(
-                                      text: "Don't have an account?",
+                                      text: "Não tem uma conta?",
                                       style: TextStyle(
                                         color: Colors.grey
                                       )
                                     ),
                                     TextSpan(
-                                      text: ' Create',
+                                      text: ' Cadastrar',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = (){
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpScreen()));

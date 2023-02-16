@@ -35,8 +35,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('Hello', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: Colors.white),),
-                  Text('Lorem ipsum dolor sit amet', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.white),),
+                  Text('Bem vindo', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: Colors.white),),
+                  SizedBox(height: 5.0),
+                  Text('Entre e de o próximo passo na sua vida financeira', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.white),),
                 ],
               ),
             ),
@@ -52,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: ElevatedButton(
                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInScreen())),
                     child: const Text(
-                      'Log In',
+                      'Entrar',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -71,7 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.white)
                     ),
                     child: const Text(
-                      'Sign Up',
+                      'Cadastrar',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -80,7 +81,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                const Text("Or create account using social media",  style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 25.0),
+                const Text("Ou crie uma conta usando a mídia social",  style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 25.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
