@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:money_manager/screen/home/home_screen.dart';
 import 'package:money_manager/screen/welcome/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
@@ -39,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: const Color.fromRGBO(18, 20, 29, 1)
       ),
       debugShowCheckedModeBanner: false,
-      home: _active ? const WelcomeScreen() : const OnboardingScreen(),
+      home: _active ? getHome() : const OnboardingScreen(),
     );
   }
 
@@ -50,5 +52,14 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _active = ativo;
     });
+  }
+
+  Widget getHome() {
+    var user = FirebaseAuth.instance.currentUser;
+    if (user == null || user.isAnonymous == true) {
+      return const WelcomeScreen();
+    } else {
+      return const HomeScreen();
+    }
   }
 }
