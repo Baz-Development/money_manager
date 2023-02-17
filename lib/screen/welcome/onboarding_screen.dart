@@ -133,7 +133,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void irParaPaginaInicial() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
-
     _setEstado();
   }
 

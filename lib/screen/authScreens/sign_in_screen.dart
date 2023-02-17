@@ -90,9 +90,9 @@ class _SignInScreenState extends State<SignInScreen>{
                               height: 50,
                               width: double.infinity,
                               child: ElevatedButton(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                  child: Text('Entrar'.toUpperCase(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+                                child: const Padding(
+                                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                  child: Text('Entrar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
                                 ),
                                 onPressed: (){
                                   var email = emailController.text;

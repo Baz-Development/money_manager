@@ -37,30 +37,54 @@ class _HomeScreenState extends State<HomeScreen> {
         showElevation: true,
         onItemSelected: (index) => setState(() {
           _selectedIndex = index;
-
         }),
         items: [
           FlashyTabBarItem(
             icon: const Icon(Icons.flag_outlined),
-            title: const Text('Metas'),
+            title: const Text(
+              'Metas',
+              style: TextStyle(
+                  fontSize: 13
+              ),
+            ),
           ),
           FlashyTabBarItem(
             icon: const Icon(Icons.list_rounded),
-            title: const Text('Transações'),
+            title: const Text(
+              'Transações',
+              style: TextStyle(
+                fontSize: 13
+              ),
+            ),
           ),
           FlashyTabBarItem(
             icon: const Icon(Icons.analytics_outlined),
-            title: const Text('Dashboard'),
+            title: const Text(
+              'Dashboard',
+              style: TextStyle(
+                  fontSize: 13
+              ),
+            ),
           ),
           FlashyTabBarItem(
             icon: const ImageIcon(
               AssetImage("icons/monthlyIcon.png"),
             ),
-            title: const Text('Assinaturas'),
+            title: const Text(
+              'Assinaturas',
+              style: TextStyle(
+                  fontSize: 13
+              ),
+            ),
           ),
           FlashyTabBarItem(
             icon: const Icon(Icons.more_horiz),
-            title: const Text('Mais'),
+            title: const Text(
+              'Mais',
+              style: TextStyle(
+                  fontSize: 13
+              ),
+            ),
           ),
         ],
       ),
