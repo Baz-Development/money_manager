@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:money_manager/common/theme_helper.dart';
-import 'package:money_manager/screen/sign_in_screen.dart';
-import 'package:money_manager/screen/sign_up_screen.dart';
+import 'package:money_manager/screen/authScreens/sign_in_screen.dart';
+import 'package:money_manager/screen/authScreens/sign_up_screen.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -35,13 +35,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('Hello', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: Colors.white),),
-                  Text('Lorem ipsum dolor sit amet', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.white),),
+                  Text('Bem vindo', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: Colors.white),),
+                  SizedBox(height: 5.0),
+                  Text('Entre e de o próximo passo na sua vida financeira', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.white),),
                 ],
               ),
             ),
             const SizedBox(
-              height: 200,
+              height: 100,
             ),
             Column(
               children: [
@@ -52,9 +53,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: ElevatedButton(
                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInScreen())),
                     child: const Text(
-                      'Log In',
+                      'Entrar',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
@@ -71,16 +72,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.white)
                     ),
                     child: const Text(
-                      'Sign Up',
+                      'Cadastrar',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.lightBlue,
                       ),
                     ),
                   ),
                 ),
-                const Text("Or create account using social media",  style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 25.0),
+                const Text("Ou crie uma conta usando a mídia social",  style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 25.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -141,9 +143,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       },
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 50,
                 ),
               ],
             ),

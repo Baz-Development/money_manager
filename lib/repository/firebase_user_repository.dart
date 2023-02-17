@@ -32,7 +32,7 @@ Future<User> getUser(String userId) async {
       data["fullname"],
       data["phoneNumber"],
       data["email"],
-      data["userId"]
+      userId
   );
   return user;
 }

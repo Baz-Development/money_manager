@@ -17,7 +17,7 @@ class CustomLink extends StatelessWidget {
             text: TextSpan(
               text: titulo,
               style: const TextStyle(
-                  color: Color.fromRGBO(224, 224, 224, 1)
+                  color: Colors.grey
               ),
             ),
           ),

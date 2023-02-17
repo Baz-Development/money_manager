@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomSlider extends StatelessWidget {
-  String imagem;
-  String titulo;
-  String texto;
+  String image;
+  String title;
+  TextStyle titleStyle;
+  String text;
+  TextStyle textStyle;
   String backgroundImage;
 
-  CustomSlider({super.key, required this.imagem, required this.titulo, required this.texto, required this.backgroundImage});
+  CustomSlider({super.key, required this.image, required this.title, required this.text, required this.backgroundImage, required this.titleStyle, required this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -20,41 +22,30 @@ class CustomSlider extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 100),
+          const SizedBox(height: 50),
           Image.asset(
-            imagem,
+            image,
             width: 300,
             height: 250,
           ),
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  titulo,
-                  style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                    color: Color.fromRGBO(224, 224, 224, 1)
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: titleStyle
+            ),
           ),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 64.0),
             child: Text(
-              texto,
+              text,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontSize: 18,
-                  color:  Color.fromRGBO(224, 224, 224, 1)
-              ),
+              style: textStyle
             ),
           ),
-          const SizedBox(height: 32),
         ],
       ),
     );

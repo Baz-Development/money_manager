@@ -6,7 +6,7 @@ import 'package:money_manager/common/theme_helper.dart';
 import 'package:money_manager/exceptions/FirebaseCustomException.dart';
 import 'package:money_manager/models/user_model.dart';
 import 'package:money_manager/repository/firebase_user_repository.dart';
-import 'package:money_manager/screen/home_screen.dart';
+import 'package:money_manager/screen/home/home_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
 
@@ -21,7 +21,7 @@ class SignUpScreen extends  StatefulWidget{
 }
 
 class _SignUpScreenState extends State<SignUpScreen>{
-
+  final double _headerHeight = 250;
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
@@ -46,13 +46,13 @@ class _SignUpScreenState extends State<SignUpScreen>{
         child: Column(
           children: [
             SizedBox(
-              height: 150,
-              child: HeaderWidget(150, false, "assets/splash.png", true, onTap: () {
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true, "assets/splash.png", true, onTap: () {
                 Navigator.pop(context);
-              }),
+              }), //let's create a common header widget
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
+              margin: const EdgeInsets.fromLTRB(25, 25, 25, 10),
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               alignment: Alignment.center,
               child: Column(
@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                     child: Column(
                       children: [
                         const Text(
-                          "Sign Up",
+                          "Cadastro",
                            style: TextStyle(
                              fontSize: 50,
                              color: Colors.grey
@@ -73,7 +73,14 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                           child: TextFormField(
                             controller: fullNameController,
-                            decoration: ThemeHelper().textInputDecoration('First Name', 'Enter your first name'),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: ThemeHelper().textInputDecoration('Nome', 'Insira seu nome'),
+                            validator: (val) {
+                              if (val!.isEmpty) {
+                                return "A nome é obrigatória";
+                              }
+                              return null;
+                            },
                             onChanged: (text) {
                               profilePicture = ProfilePicture(
                                 name: text,
@@ -88,11 +95,12 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                           child: TextFormField(
                             controller: emailController,
-                            decoration: ThemeHelper().textInputDecoration("E-mail address", "Enter your email"),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: ThemeHelper().textInputDecoration("Email", "Insira o email"),
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
                               if(val!.isNotEmpty && !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(val)){
-                                return "Enter a valid email address";
+                                return "Insira um Email válido";
                               }
                               return null;
                             },
@@ -103,13 +111,14 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                           child: TextFormField(
                             controller: phoneController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
                             decoration: ThemeHelper().textInputDecoration(
-                                "Mobile Number",
-                                "Enter your mobile number"),
+                                "Telefone",
+                                "Insira seu Telefone"),
                             keyboardType: TextInputType.phone,
                             validator: (val) {
                               if(val!.isNotEmpty && !RegExp(r"^(\d+)*$").hasMatch(val)){
-                                return "Enter a valid phone number";
+                                return "Insira um telefone válido";
                               }
                               return null;
                             },
@@ -120,12 +129,33 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                           child: TextFormField(
                             controller: passwordController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
                             obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
-                                "Password*", "Enter your password"),
+                                "Senha*", "Insira a senha"),
                             validator: (val) {
                               if (val!.isEmpty) {
-                                return "Please enter your password";
+                                return "A senha é obrigatória";
+                              } else if(val.length < 6) {
+                                return "Senha fraca";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
+                        Container(
+                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                          child: TextFormField(
+                            obscureText: true,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: ThemeHelper().textInputDecoration(
+                                "Confirme a senha*", "Confirme a senha"),
+                            validator: (val) {
+                              if (val!.isEmpty) {
+                                return "Confirmar a senha é obrigatório";
+                              } else if(val != passwordController.text) {
+                                return "As senhas não coincidem";
                               }
                               return null;
                             },
@@ -135,9 +165,9 @@ class _SignUpScreenState extends State<SignUpScreen>{
                         FormField<bool>(
                           builder: (state) {
                             return Column(
-                              children: <Widget>[
+                              children: [
                                 Row(
-                                  children: <Widget>[
+                                  children: [
                                     Checkbox(
                                       value: checkboxValue,
                                       side: const BorderSide(
@@ -153,21 +183,17 @@ class _SignUpScreenState extends State<SignUpScreen>{
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        debugPrint("terms and conditions");
+                                        debugPrint("Termos de privacidade e uso");
                                       },
                                       child: RichText(
                                         text: const TextSpan(
-                                          text: 'I accept all',
+                                          text: 'Eu aceito todos',
                                           style: TextStyle(color: Colors.grey),
                                           children: [
                                             TextSpan(
-                                              text: ' terms and conditions',
+                                              text: ' Termos de privacidade e uso',
                                               style: TextStyle(color: Colors.blueAccent)
-                                            ),
-                                            TextSpan(
-                                                text: ' .',
-                                                style: TextStyle(color: Colors.grey)
-                                            ),
+                                            )
                                           ],
                                         ),
                                       ),
@@ -187,22 +213,22 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           },
                           validator: (value) {
                             if (!checkboxValue) {
-                              return 'You need to accept terms and conditions';
+                              return 'Você precisa aceitar os termos e condições';
                             } else {
                               return null;
                             }
                           },
                         ),
                         const SizedBox(height: 20.0),
-                        Container(
-                          decoration: ThemeHelper().buttonBoxDecoration(context),
+                        SizedBox(
+                          height: 50,
+                          width: double.infinity,
                           child: ElevatedButton(
-                            style: ThemeHelper().buttonStyle(),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                            child: const Padding(
+                              padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
                               child: Text(
-                                "Register".toUpperCase(),
-                                style: const TextStyle(
+                                "Cadastrar",
+                                style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
@@ -265,7 +291,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return ThemeHelper().alartDialog("Ops", e.cause, context);
+          return ThemeHelper().alartDialog("Ops, ocorreu um erro, tente novamente mais tarde ou entre em contato com o suporte", e.cause, context);
         },
       );
     }

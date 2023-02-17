@@ -8,6 +8,7 @@ class ThemeHelper{
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
       fillColor: Colors.white,
       filled: true,
       contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
