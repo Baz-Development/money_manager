@@ -21,7 +21,7 @@ class SignUpScreen extends  StatefulWidget{
 }
 
 class _SignUpScreenState extends State<SignUpScreen>{
-
+  final double _headerHeight = 250;
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
@@ -46,13 +46,13 @@ class _SignUpScreenState extends State<SignUpScreen>{
         child: Column(
           children: [
             SizedBox(
-              height: 150,
-              child: HeaderWidget(150, false, "assets/splash.png", true, onTap: () {
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true, "assets/splash.png", true, onTap: () {
                 Navigator.pop(context);
-              }),
+              }), //let's create a common header widget
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
+              margin: const EdgeInsets.fromLTRB(25, 25, 25, 10),
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               alignment: Alignment.center,
               child: Column(
