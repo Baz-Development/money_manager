@@ -42,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             const SizedBox(
-              height: 200,
+              height: 100,
             ),
             Column(
               children: [
@@ -55,7 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: const Text(
                       'Entrar',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
@@ -74,7 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: const Text(
                       'Cadastrar',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.lightBlue,
                       ),
@@ -143,9 +143,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       },
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 50,
                 ),
               ],
             ),
