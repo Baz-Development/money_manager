@@ -202,6 +202,13 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
               ],
             ),
           ),
+          Container(
+            constraints: const BoxConstraints(
+              maxHeight: double.infinity,
+            ),
+            color: Colors.grey,
+            child: const Text("teste")
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:money_manager/screen/dashboard/dashboard_screen.dart';
 import 'package:money_manager/screen/goals/goal_screen.dart';
 import 'package:money_manager/screen/more/more_screen.dart';
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           FlashyTabBarItem(
-            icon: const Icon(Icons.list_rounded),
+            icon: const Icon(FontAwesomeIcons.exchangeAlt),
             title: const Text(
               'Transações',
               style: TextStyle(
@@ -67,9 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           FlashyTabBarItem(
-            icon: const ImageIcon(
-              AssetImage("icons/monthlyIcon.png"),
-            ),
+            icon: const Icon(Icons.edit_note_sharp),
             title: const Text(
               'Assinaturas',
               style: TextStyle(

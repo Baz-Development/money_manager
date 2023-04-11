@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen>{
                               width: double.infinity,
                               child: ElevatedButton(
                                 child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                  padding: EdgeInsets.fromLTRB(40, 25, 40, 10),
                                   child: Text('Entrar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
                                 ),
                                 onPressed: (){
