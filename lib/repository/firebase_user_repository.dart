@@ -12,7 +12,9 @@ Future<void> createUser(User user) async {
       {
         "fullname": user.fullname,
         "phoneNumber": user.phoneNumber,
-        "email": user.email
+        "email": user.email,
+        "imagePath": user.imagePath,
+        "about": user.about
       }
     );
 }
@@ -29,10 +31,12 @@ Future<User> getUser(String userId) async {
   }
 
   User user = User(
-      data["fullname"],
-      data["phoneNumber"],
-      data["email"],
-      userId
+    data["fullname"],
+    data["phoneNumber"],
+    data["email"],
+    userId,
+    data["imagePath"],
+    data["about"]
   );
   return user;
 }
@@ -46,7 +50,9 @@ Future<void> editUser(User user) async {
       {
         "fullname": user.fullname,
         "phoneNumber": user.phoneNumber,
-        "email": user.email
+        "email": user.email,
+        "imagePath": user.imagePath,
+        "about": user.about
       }
     );
 }

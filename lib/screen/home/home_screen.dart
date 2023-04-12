@@ -6,6 +6,7 @@ import 'package:money_manager/screen/goals/goal_screen.dart';
 import 'package:money_manager/screen/more/more_screen.dart';
 import 'package:money_manager/screen/subscriptions/subscription_screen.dart';
 import 'package:money_manager/screen/transactions/transactions_screen.dart';
+import 'package:money_manager/widgets/appbar_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildAppBar(context, false, true),
       backgroundColor: const Color.fromRGBO(18, 20, 29, 1),
       body: Center(
         child: _screens[_selectedIndex]
