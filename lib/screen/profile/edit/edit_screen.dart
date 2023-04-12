@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:money_manager/common/shared_preferences.dart';
 import 'package:money_manager/models/user_model.dart';
-import 'package:money_manager/utils/user_preferences.dart';
 import 'package:money_manager/widgets/appbar_widget.dart';
 import 'package:money_manager/widgets/profile_widget.dart';
 import 'package:money_manager/widgets/textfield_widget.dart';
@@ -14,7 +14,25 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  User user = UserPreferences.myUser;
+  SharedPref sharedPref = SharedPref();
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    try {
+      User user = User.fromJson(await sharedPref.read("user"));
+      setState(() {
+        _user = user;
+      });
+    } on Exception {
+      // do something
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +44,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
         physics: const BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: user.imagePath,
+            imagePath: _user!.imagePath,
             isEdit: true,
             onClicked: () async {},
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: 'FullName',
-            text: user.fullname,
+            text: _user!.fullname,
             onChanged: (name) {
               EasyDebounce.debounce(
                   'debouncer-edit-profile-name',
@@ -47,7 +65,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           const SizedBox(height: 24),
           TextFieldWidget(
             label: 'Email',
-            text: user.email,
+            text: _user!.email,
             onChanged: (email) {
               EasyDebounce.debounce(
                   'debouncer-edit-profile-email',
@@ -59,7 +77,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           const SizedBox(height: 24),
           TextFieldWidget(
             label: 'About',
-            text: user.about,
+            text: _user!.about,
             maxLines: 5,
             onChanged: (about) {
               EasyDebounce.debounce(
