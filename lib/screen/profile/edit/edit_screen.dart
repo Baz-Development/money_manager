@@ -1,7 +1,9 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:money_manager/common/shared_preferences.dart';
 import 'package:money_manager/models/user_model.dart';
+import 'package:money_manager/repository/firebase_user_repository.dart';
 import 'package:money_manager/widgets/appbar_widget.dart';
 import 'package:money_manager/widgets/profile_widget.dart';
 import 'package:money_manager/widgets/textfield_widget.dart';
@@ -15,7 +17,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   SharedPref sharedPref = SharedPref();
-  User? _user;
+  UserModel? _user;
 
   @override
   void initState() {
@@ -25,7 +27,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Future<void> _loadUser() async {
     try {
-      User user = User.fromJson(await sharedPref.read("user"));
+      UserModel user = UserModel.fromJson(await sharedPref.read("user"));
       setState(() {
         _user = user;
       });
@@ -92,4 +94,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
     );
   }
+}
+
+
+Future<void> editUser(String? fullname, String? email, String? about) async {
+  var firebaseInstance = FirebaseAuth.instance;
+  var user = firebaseInstance.currentUser;
+  var userId = user?.uid;
+  if(userId == null) {
+    return;
+  }
+  UserModel userRes = await getUser(userId);
+  userRes.fullname = fullname ?? userRes.fullname;
+  userRes.email = email ?? userRes.email;
+  userRes.about = about ?? userRes.about;
+  editUserdb(userRes);
 }

@@ -1,7 +1,7 @@
 import 'package:money_manager/models/user_model.dart';
 
 class UserPreferences {
-  static var myUser = User(
+  static var myUser = UserModel(
     "Felipe Baz Mitsuishi",
     "(11) 91258-1464",
     "fbazmitsuishi@gmail.com",

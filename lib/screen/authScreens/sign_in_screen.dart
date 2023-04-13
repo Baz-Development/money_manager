@@ -156,7 +156,7 @@ class _SignInScreenState extends State<SignInScreen>{
       if( userId == null) {
         return;
       }
-      User user = await getUser(userId);
+      UserModel user = await getUser(userId);
 
       SharedPref sharedPref = SharedPref();
       await sharedPref.save("user", user);

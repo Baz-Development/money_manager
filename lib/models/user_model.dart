@@ -1,12 +1,12 @@
-class User {
-  final String userId;
-  final String fullname;
-  final String phoneNumber;
-  final String email;
-  final String imagePath;
-  final String about;
+class UserModel {
+  String userId;
+  String fullname;
+  String phoneNumber;
+  String email;
+  String imagePath;
+  String about;
 
-  User(
+  UserModel(
       this.fullname,
       this.phoneNumber,
       this.email,
@@ -15,7 +15,7 @@ class User {
       this.about
   );
 
-  User.fromJson(Map<String, dynamic> json)
+  UserModel.fromJson(Map<String, dynamic> json)
       : userId = json['userId'],
         fullname = json['fullname'],
         phoneNumber = json['phoneNumber'],

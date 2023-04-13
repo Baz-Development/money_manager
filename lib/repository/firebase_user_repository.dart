@@ -3,7 +3,7 @@ import 'package:money_manager/exceptions/FirebaseCustomException.dart';
 
 import '../models/user_model.dart';
 
-Future<void> createUser(User user) async {
+Future<void> createUser(UserModel user) async {
   await FirebaseFirestore
     .instance
     .collection("users")
@@ -19,7 +19,7 @@ Future<void> createUser(User user) async {
     );
 }
 
-Future<User> getUser(String userId) async {
+Future<UserModel> getUser(String userId) async {
   var res = await FirebaseFirestore
     .instance
     .collection("users")
@@ -30,7 +30,7 @@ Future<User> getUser(String userId) async {
     throw const FirebaseCustomException("Usuário não encontrado");
   }
 
-  User user = User(
+  UserModel user = UserModel(
     data["fullname"],
     data["phoneNumber"],
     data["email"],
@@ -41,7 +41,7 @@ Future<User> getUser(String userId) async {
   return user;
 }
 
-Future<void> editUser(User user) async {
+Future<void> editUserdb(UserModel user) async {
   await FirebaseFirestore
     .instance
     .collection("users")

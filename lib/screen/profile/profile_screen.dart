@@ -16,7 +16,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   SharedPref sharedPref = SharedPref();
-  User? _user;
+  UserModel? _user;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _loadUser() async {
     try {
-      User user = User.fromJson(await sharedPref.read("user"));
+      UserModel user = UserModel.fromJson(await sharedPref.read("user"));
       setState(() {
         _user = user;
       });
@@ -70,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName(UserModel user) => Column(
     children: [
       Text(
         user.fullname,
@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     onClicked: () {},
   );
 
-  Widget buildPhoneNumber(User user) => Container(
+  Widget buildPhoneNumber(UserModel user) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 48),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ),
   );
 
-  Widget buildAbout(User user) => Container(
+  Widget buildAbout(UserModel user) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 48),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

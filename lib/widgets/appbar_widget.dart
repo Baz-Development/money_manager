@@ -23,7 +23,7 @@ AppBar buildAppBar(BuildContext context, bool hasBack, bool haveProfileIcon) {
   );
 }
 
-Widget? profileImageChecker(BuildContext context, User user, bool hasProfileImage) {
+Widget? profileImageChecker(BuildContext context, UserModel user, bool hasProfileImage) {
 
   if(hasProfileImage) {
     return ProfileWidget(

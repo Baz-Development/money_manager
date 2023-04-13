@@ -260,7 +260,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
   }
 
   void createUserInDB(String email, String fullname, String phoneNumber, String userId, String imagePath, String about) async {
-    var user = User(fullname, phoneNumber, email, userId, imagePath, about);
+    var user = UserModel(fullname, phoneNumber, email, userId, imagePath, about);
     await createUser(user);
   }
 
