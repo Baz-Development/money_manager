@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_calculator/flutter_dynamic_calculator.dart';
 import 'package:money_formatter/money_formatter.dart';
+import 'package:money_manager/models/transactions_models/user_transaction_model.dart';
+import 'package:money_manager/repository/firebase_user_transactions_repository.dart';
 import 'package:uuid/uuid.dart';
 
 class AddBalanceScreen extends StatefulWidget {
@@ -376,8 +378,13 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
 
   Future createTransactionInDB() async {
     var userId = FirebaseAuth.instance.currentUser?.uid;
-    String uuid = const Uuid().v4();
-    // var transaction = TransactionModel(_currentValue, _currency, _textTypeButton, userId!, uuid);
-    // await createTransaction(transaction);
+    var transaction = UserTransactionModel(
+      userId!,
+      _currentValue,
+      _currency,
+      _textTypeButton,
+      _selectedItem
+    );
+    createTransaction(transaction);
   }
 }
