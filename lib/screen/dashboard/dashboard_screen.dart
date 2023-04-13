@@ -13,13 +13,13 @@ class DashboardScreen extends StatefulWidget {
 }
 class _DashboardScreenState extends State<DashboardScreen>{
   var _dateTabBar = DateTime.now();
-  var _dateFormated = "";
+  var _dateFormatted = "";
   List<Category> _kCategories = [];
 
   @override
   void initState() {
     super.initState();
-    _dateFormated = formatDate(_dateTabBar);
+    _dateFormatted = formatDate(_dateTabBar);
     _kCategories = getCategories(_dateTabBar.month);
   }
 
@@ -96,32 +96,32 @@ class _DashboardScreenState extends State<DashboardScreen>{
                   onPressed: (){
                     debugPrint("back clicked");
                     var date = subtractOneMonth(_dateTabBar);
-                    var formated = formatDate(_dateTabBar);
+                    var formatted = formatDate(_dateTabBar);
                     var categories = getCategories(date.month);
                     setState(() {
                       _dateTabBar = date;
-                      _dateFormated = formated;
+                      _dateFormatted = formatted;
                       _kCategories = categories;
                     });
-                    debugPrint(_dateFormated);
+                    debugPrint(_dateFormatted);
                   },
                   icon: const Icon(
                       Icons.arrow_back_ios
                   )
               ),
-              Text(_dateFormated),
+              Text(_dateFormatted),
               IconButton(
                   onPressed: (){
                     debugPrint("next clicked");
                     var date = addOneMonth(_dateTabBar);
-                    var formated = formatDate(date);
+                    var formatted = formatDate(date);
                     var categories = getCategories(date.month);
                     setState(() {
                       _dateTabBar = date;
-                      _dateFormated = formated;
+                      _dateFormatted = formatted;
                       _kCategories = categories;
                     });
-                    debugPrint(_dateFormated);
+                    debugPrint(_dateFormatted);
                   },
                   icon: const Icon(
                       Icons.arrow_forward_ios
