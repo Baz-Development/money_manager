@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/models/circular_chart_data.dart';
+import 'package:money_manager/screen/add_balance/add_balance.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/monthly_expenses.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -23,6 +24,60 @@ class _DashboardScreenState extends State<DashboardScreen>{
     return SafeArea(
       child: Column(
         children: <Widget>[
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    debugPrint("renda tap");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const AddBalanceScreen(type: "Receitas", color: Colors.green)),
+                    );
+                  },
+                  child: Column(
+                    children: const [
+                      Icon(
+                        Icons.trending_up,
+                        color: Colors.green,
+                      ),
+                      Text(
+                        "Receitas",
+                        style: TextStyle(
+                          color: Colors.grey
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint("divida tap");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const AddBalanceScreen(type: "Despesas", color: Colors.red)),
+                    );
+                  },
+                  child: Column(
+                    children: const [
+                      Icon(
+                        Icons.trending_down,
+                        color: Colors.red,
+                      ),
+                      Text(
+                        "Despesas",
+                        style: TextStyle(
+                            color: Colors.grey
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
