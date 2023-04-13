@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/categories_row.dart';
+import 'package:money_manager/screen/dashboard/monthly_expenses/pie_chart.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/pie_chart_view.dart';
 
 class MonthlyExpenses extends StatelessWidget {
   const MonthlyExpenses({
     super.key,
-    required this.height,
+    required this.height, required this.kCategories,
   });
 
   final double height;
+  final List<Category> kCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,9 @@ class MonthlyExpenses extends StatelessWidget {
           ),
           Expanded(
             child: Row(
-              children: const <Widget>[
-                CategoriesRow(),
-                PieChartView(),
+              children: <Widget>[
+                CategoriesRow(kCategories: kCategories),
+                PieChartView(kCategories: kCategories),
               ],
             ),
           ),

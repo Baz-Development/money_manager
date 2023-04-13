@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/pie_chart.dart';
 
 class PieChartView extends StatelessWidget {
-  const PieChartView({super.key});
+  const PieChartView({super.key, required this.kCategories});
 
+  final List<Category> kCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +36,11 @@ class PieChartView extends StatelessWidget {
                 child: SizedBox(
                   width: constraint.maxWidth * 0.6,
                   child: CustomPaint(
-                    child: const Center(),
                     foregroundPainter: PieChart(
                       width: constraint.maxWidth * 0.5,
                       categories: kCategories,
                     ),
+                    child: const Center(),
                   ),
                 ),
               ),

@@ -6,12 +6,15 @@ import 'package:money_manager/screen/welcome/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'screen/welcome/onboarding_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // Inicializa os dados de localização para o português do Brasil
+  await initializeDateFormatting('pt_BR', null);
   runApp(const MyApp());
 }
 

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/pie_chart.dart';
 
 class CategoriesRow extends StatelessWidget {
-  const CategoriesRow({super.key});
+  const CategoriesRow({super.key, required this.kCategories});
 
+  final List<Category> kCategories;
 
   @override
   Widget build(BuildContext context) {
