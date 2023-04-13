@@ -27,6 +27,15 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
   late Color _colorTypeButton;
 
   @override
+  void initState() {
+    super.initState();
+    var first = dropDownList().first;
+    setState(() {
+      _selectedItem = first;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -378,13 +387,15 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
 
   Future createTransactionInDB() async {
     var userId = FirebaseAuth.instance.currentUser?.uid;
-    var transaction = UserTransactionModel(
-      userId!,
-      _currentValue,
-      _currency,
-      _textTypeButton,
-      _selectedItem
-    );
-    createTransaction(transaction);
+    if(_selectedItem != "") {
+      var transaction = UserTransactionModel(
+          userId!,
+          _currentValue,
+          _currency,
+          _textTypeButton,
+          _selectedItem
+      );
+      createTransaction(transaction);
+    }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/models/transactions_models/user_transaction_model.dart';
+import 'package:money_manager/repository/firebase_user_transactions_repository.dart';
 import 'package:money_manager/screen/add_balance/add_balance.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/categories_row.dart';
 import 'package:money_manager/screen/dashboard/monthly_expenses/monthly_expenses.dart';
@@ -20,7 +22,18 @@ class _DashboardScreenState extends State<DashboardScreen>{
   void initState() {
     super.initState();
     _dateFormatted = formatDate(_dateTabBar);
-    _kCategories = getCategories(_dateTabBar.month);
+    _loadkCategories();
+  }
+
+  Future<void> _loadkCategories() async {
+    try {
+      var categories = await getCategories(_dateTabBar);
+      setState(() {
+        _kCategories = categories;
+      });
+    } on Exception {
+      // do something
+    }
   }
 
   @override
@@ -93,11 +106,11 @@ class _DashboardScreenState extends State<DashboardScreen>{
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                  onPressed: (){
+                  onPressed: () async {
                     debugPrint("back clicked");
                     var date = subtractOneMonth(_dateTabBar);
                     var formatted = formatDate(_dateTabBar);
-                    var categories = getCategories(date.month);
+                    var categories = await getCategories(date);
                     setState(() {
                       _dateTabBar = date;
                       _dateFormatted = formatted;
@@ -111,11 +124,11 @@ class _DashboardScreenState extends State<DashboardScreen>{
               ),
               Text(_dateFormatted),
               IconButton(
-                  onPressed: (){
+                  onPressed: () async {
                     debugPrint("next clicked");
                     var date = addOneMonth(_dateTabBar);
                     var formatted = formatDate(date);
-                    var categories = getCategories(date.month);
+                    var categories = await getCategories(date);
                     setState(() {
                       _dateTabBar = date;
                       _dateFormatted = formatted;
@@ -176,26 +189,81 @@ class _DashboardScreenState extends State<DashboardScreen>{
     return '$month - $year';
   }
 
-  List<Category> getCategories(int month) {
-    if(month % 2 == 0) {
-      return [
-        Category('groceries', amount: 500.00),
-        Category('online Shopping', amount: 150.00),
-        Category('eating', amount: 90.00),
-        Category('bills', amount: 90.00),
-        Category('subscriptions', amount: 40.00),
-        Category('fees', amount: 20.00),
-      ];
-    } else {
-      return [
-        Category('groceries', amount: 250.00),
-        Category('online Shopping', amount: 100.00),
-        Category('eating', amount: 100.00),
-        Category('bills', amount: 200.00),
-        Category('subscriptions', amount: 80.00),
-        Category('fees', amount: 90.00),
-      ];
+  Future<List<Category>> getCategories(DateTime date) async {
+    var category = await getCategoryValues(date);
+    return category;
+  }
+
+  Future<List<Category>> getCategoryValues(DateTime date) async {
+    var transactions = await getTransactionsByMonth(date);
+    var map = {};
+    List<Category> list = [];
+    for (UserTransactionModel transaction in transactions.transactions) {
+      if (!map.keys.contains(transaction.category)) {
+        switch (transaction.type.toUpperCase()) {
+          case "RECEITAS":
+            map[transaction.category] = transaction.currency;
+            list.add(
+              Category(
+                transaction.category,
+                amount: transaction.currency
+              )
+            );
+            break;
+          case "INVESTIMENTOS":
+            map[transaction.category] = transaction.currency;
+            list.add(
+              Category(
+                transaction.category,
+                amount: transaction.currency
+              )
+            );
+            break;
+          case "DESPESAS":
+            map[transaction.category] = -transaction.currency;
+            list.add(
+              Category(
+                transaction.category,
+                amount: -transaction.currency
+              )
+            );
+            break;
+          case "DESPESAS CARTÃO":
+            map[transaction.category] = -transaction.currency;
+            list.add(
+              Category(
+                transaction.category,
+                amount: -transaction.currency
+              )
+            );
+            break;
+        }
+      } else {
+        switch (transaction.type.toUpperCase()) {
+          case "RECEITAS":
+            map[transaction.category] += transaction.currency;
+            var transactionRes = list.firstWhere((element) => element.name == transaction.category);
+            transactionRes.amount += transaction.currency;
+            break;
+          case "INVESTIMENTOS":
+            map[transaction.category] += transaction.currency;
+            var transactionRes = list.firstWhere((element) => element.name == transaction.category);
+            transactionRes.amount += transaction.currency;
+            break;
+          case "DESPESAS":
+            map[transaction.category] -= transaction.currency;
+            var transactionRes = list.firstWhere((element) => element.name == transaction.category);
+            transactionRes.amount -= transaction.currency;
+            break;
+          case "DESPESAS CARTÃO":
+            map[transaction.category] -= transaction.currency;
+            var transactionRes = list.firstWhere((element) => element.name == transaction.category);
+            transactionRes.amount -= transaction.currency;
+            break;
+        }
+      }
     }
+    return list;
   }
 
 }

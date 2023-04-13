@@ -1,6 +1,8 @@
+import 'package:money_manager/models/transactions_models/user_transaction_model.dart';
+
 class UserTransactionMonthModel {
-  List<UserTransactionMonthModel> transactions;
-  double date;
+  List<UserTransactionModel> transactions;
+  String date;
 
   UserTransactionMonthModel(
     this.date,
@@ -8,8 +10,8 @@ class UserTransactionMonthModel {
   );
 
   UserTransactionMonthModel.fromJson(Map<String, dynamic> json)
-      : date = json['date'],
-        transactions = json['transactions'];
+    : date = json['date'],
+      transactions = json['transactions'];
 
   Map<String, dynamic> toJson() => {
     'date': date,

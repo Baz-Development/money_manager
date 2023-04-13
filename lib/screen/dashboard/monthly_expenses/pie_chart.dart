@@ -58,7 +58,7 @@ class Category {
   Category(this.name, {required this.amount});
 
   final String name;
-  final double amount;
+  double amount;
 }
 
 final kNeumorphicColors = [
