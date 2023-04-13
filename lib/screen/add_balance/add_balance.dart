@@ -16,13 +16,13 @@ class AddBalanceScreen extends StatefulWidget {
 }
 
 class _AddBalanceScreenState extends State<AddBalanceScreen>{
-  var _imageTypeButton = "icons/receita_icon.png";
+  var _imageTypeButton = "assets/receita_icon.png";
   double _currentValue = 0;
   var _currency = "BRL";
   var _selectedItem = "";
   _AddBalanceScreenState(this._textTypeButton, this._colorTypeButton);
-  late final String _textTypeButton;
-  late final Color _colorTypeButton;
+  late String _textTypeButton;
+  late Color _colorTypeButton;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
                 context: context,
                 builder: (context) {
                   return SizedBox(
-                    height: 200,
+                    height: 250,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -53,13 +53,13 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
                             setState(() {
                               _colorTypeButton = Colors.green;
                               _textTypeButton = "Receitas";
-                              _imageTypeButton = "icons/receita_icon.png";
+                              _imageTypeButton = "assets/receita_icon.png";
                             });
                             Navigator.pop(context);
                           },
                           child: const ListTile(
                             leading: ImageIcon(
-                              AssetImage("icons/receita_icon.png"),
+                              AssetImage("assets/receita_icon.png"),
                             ),
                             title: Text("Receitas"),
                           )
@@ -70,13 +70,13 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
                             setState(() {
                               _colorTypeButton = Colors.green;
                               _textTypeButton = "Investimentos";
-                              _imageTypeButton = "icons/investimento.png";
+                              _imageTypeButton = "assets/investimento.png";
                             });
                             Navigator.pop(context);
                           },
                           child: const ListTile(
                             leading: ImageIcon(
-                              AssetImage("icons/investimento.png"),
+                              AssetImage("assets/investimento.png"),
                             ),
                             title: Text("Investimentos"),
                           )
@@ -87,13 +87,13 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
                             setState(() {
                               _colorTypeButton = Colors.red;
                               _textTypeButton = "Despesas";
-                              _imageTypeButton = "icons/despesa_icon.png";
+                              _imageTypeButton = "assets/despesa_icon.png";
                             });
                             Navigator.pop(context);
                           },
                           child: const ListTile(
                             leading: ImageIcon(
-                              AssetImage("icons/despesa_icon.png"),
+                              AssetImage("assets/despesa_icon.png"),
                             ),
                             title: Text("Despesas"),
                           )
@@ -104,13 +104,13 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
                             setState(() {
                               _colorTypeButton = Colors.red;
                               _textTypeButton = "Despesas cartão";
-                              _imageTypeButton = "icons/despesa_cartao.png";
+                              _imageTypeButton = "assets/despesa_cartao.png";
                             });
                             Navigator.pop(context);
                           },
                           child: const ListTile(
                             leading: ImageIcon(
-                              AssetImage("icons/despesa_cartao.png"),
+                              AssetImage("assets/despesa_cartao.png"),
                             ),
                             title: Text("Despesa cartão"),
                           )
@@ -165,7 +165,7 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
                         showCalculatorBottomSheet();
                       },
                       child: Text(
-                        formatCurrency(_currentValue ?? 0),
+                        formatCurrency(_currentValue),
                         style: const TextStyle(
                             fontSize: 28,
                             color: Colors.grey
@@ -287,7 +287,7 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
 
   Future showCalculatorBottomSheet() {
     var calc = DynamicCalculator(
-      value: _currentValue ?? 0,
+      value: _currentValue,
       hideExpression: false,
       hideSurroundingBorder: true,
       showCalculatorDisplay: true,

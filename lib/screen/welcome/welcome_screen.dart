@@ -31,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               }),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 60, left: 25, right: 25),
+              padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
@@ -42,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             const SizedBox(
-              height: 100,
+              height: 15,
             ),
             Column(
               children: [

@@ -43,8 +43,8 @@ class _SignInScreenState extends State<SignInScreen>{
             ),
             SafeArea(
               child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),// This wiLogin into your accountll be the login form
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),// This wiLogin into your accountll be the login form
                   child: Column(
                     children: [
                       const Text(
@@ -55,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen>{
                         'Entre na sua conta',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 20.0),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -93,9 +93,13 @@ class _SignInScreenState extends State<SignInScreen>{
                               height: 50,
                               width: double.infinity,
                               child: ElevatedButton(
-                                child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(40, 25, 40, 10),
-                                  child: Text('Entrar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),),
+                                child: const Text(
+                                  'Entrar',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white
+                                  ),
                                 ),
                                 onPressed: (){
                                   var email = emailController.text;
@@ -117,7 +121,7 @@ class _SignInScreenState extends State<SignInScreen>{
                                       )
                                     ),
                                     TextSpan(
-                                      text: 'Cadastrar',
+                                      text: ' Cadastrar',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = (){
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpScreen()));
