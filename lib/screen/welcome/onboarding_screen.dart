@@ -85,22 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: const EdgeInsets.only(bottom: 100.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CustomButton(
-                  title: 'Voltar',
-                  irParaPaginaInicial: voltarCard,
-                  borderColor: Colors.black12,
-                  backgroundColor: Colors.black38,
-                  isUserInteractive: _currentPage != 0,
-                ),
-                CustomButton(
-                  title: _currentPage == 2 ? 'Quero conhecer' : 'Continuar',
-                  irParaPaginaInicial: _currentPage == 2 ? irParaPaginaInicial : proximoCard,
-                  borderColor: Colors.deepPurple,
-                  backgroundColor: Colors.blueAccent,
-                  isUserInteractive: true,
-                ),
-              ],
+              children: buttonsList(),
             ),
           ),
           Padding(
@@ -131,6 +116,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  List<Widget> buttonsList() {
+
+    List<Widget> buttonsList = [];
+
+    if(_currentPage != 0) {
+      buttonsList.add(
+          backButton()
+      );
+    }
+
+    buttonsList.add(
+      CustomButton(
+        title: _currentPage == 2 ? 'Quero conhecer' : 'Continuar',
+        irParaPaginaInicial: _currentPage == 2 ? irParaPaginaInicial : proximoCard,
+        borderColor: Colors.deepPurple,
+        backgroundColor: Colors.blueAccent,
+        isUserInteractive: true,
+      )
+    );
+
+    return buttonsList;
+  }
+
   void irParaPaginaInicial() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
     _setEstado();
@@ -151,5 +159,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (!ativo) {
       await prefs.setBool('ONBOARDING', true);
     }
+  }
+
+  Widget backButton() {
+    return CustomButton(
+      title: 'Voltar',
+      irParaPaginaInicial: voltarCard,
+      borderColor: Colors.black12,
+      backgroundColor: Colors.black38,
+      isUserInteractive: _currentPage != 0,
+    );
   }
 }

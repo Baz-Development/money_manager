@@ -14,4 +14,21 @@ class User {
       this.imagePath,
       this.about
   );
+
+  User.fromJson(Map<String, dynamic> json)
+      : userId = json['userId'],
+        fullname = json['fullname'],
+        phoneNumber = json['phoneNumber'],
+        email = json['email'],
+        imagePath = json['imagePath'],
+        about = json['about'];
+
+  Map<String, dynamic> toJson() => {
+    'userId': userId,
+    'fullname': fullname,
+    'phoneNumber': phoneNumber,
+    'email': email,
+    'imagePath': imagePath,
+    'about': about,
+  };
 }

@@ -259,8 +259,8 @@ class _SignUpScreenState extends State<SignUpScreen>{
     );
   }
 
-  void createUserInDB(String email, String fullname, String phoneNumber, String userId) async {
-    var user = User(fullname, phoneNumber, email, userId);
+  void createUserInDB(String email, String fullname, String phoneNumber, String userId, String imagePath, String about) async {
+    var user = User(fullname, phoneNumber, email, userId, imagePath, about);
     await createUser(user);
   }
 
@@ -286,7 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
           ),
           (Route<dynamic> route) => false
       );
-      createUserInDB(email, fullname, phoneNumber, userId);
+      createUserInDB(email, fullname, phoneNumber, userId, "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80", "about me");
     } on FirebaseCustomException catch (e) {
       showDialog(
         context: context,
@@ -295,6 +295,5 @@ class _SignUpScreenState extends State<SignUpScreen>{
         },
       );
     }
-
   }
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:money_manager/common/shared_preferences.dart';
 import 'package:money_manager/common/theme_helper.dart';
 import 'package:money_manager/exceptions/FirebaseCustomException.dart';
+import 'package:money_manager/models/user_model.dart';
 import 'package:money_manager/screen/authScreens/forget_password_screen.dart';
 import 'package:money_manager/screen/home/home_screen.dart';
 import 'package:money_manager/screen/authScreens/sign_up_screen.dart';
 import 'package:money_manager/services/firebase_auth_service.dart';
 import 'package:money_manager/widgets/header_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../repository/firebase_user_repository.dart';
 
@@ -92,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen>{
                               child: ElevatedButton(
                                 child: const Padding(
                                   padding: EdgeInsets.fromLTRB(40, 25, 40, 10),
-                                  child: Text('Entrar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+                                  child: Text('Entrar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),),
                                 ),
                                 onPressed: (){
                                   var email = emailController.text;
@@ -114,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen>{
                                       )
                                     ),
                                     TextSpan(
-                                      text: ' Cadastrar',
+                                      text: 'Cadastrar',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = (){
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpScreen()));
@@ -153,7 +156,11 @@ class _SignInScreenState extends State<SignInScreen>{
       if( userId == null) {
         return;
       }
-      await getUser(userId);
+      User user = await getUser(userId);
+
+      SharedPref sharedPref = SharedPref();
+      await sharedPref.save("user", user);
+
       debugPrint("user logged");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
