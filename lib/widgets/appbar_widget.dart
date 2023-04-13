@@ -6,8 +6,6 @@ import 'package:money_manager/utils/user_preferences.dart';
 import 'package:money_manager/widgets/profile_widget.dart';
 
 AppBar buildAppBar(BuildContext context, bool hasBack, bool haveProfileIcon) {
-  final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-  const icon = CupertinoIcons.moon_stars;
   final user = UserPreferences.myUser;
 
   return AppBar(

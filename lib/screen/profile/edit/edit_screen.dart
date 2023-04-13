@@ -46,7 +46,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         physics: const BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: _user!.imagePath,
+            imagePath: _user?.imagePath ?? "",
             isEdit: true,
             onClicked: () async {},
           ),
@@ -58,8 +58,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
               EasyDebounce.debounce(
                   'debouncer-edit-profile-name',
                   const Duration(milliseconds: 1500),
-                  () => {
-                    debugPrint(name)
+                  () {
+                    debugPrint(name);
+                    editUser(name, null, null);
                   }
               );
             },
@@ -72,7 +73,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               EasyDebounce.debounce(
                   'debouncer-edit-profile-email',
                   const Duration(milliseconds: 1500),
-                  () => debugPrint(email)
+                  () {
+                    debugPrint(email);
+                    editUser(null, email, null);
+                  }
               );
             },
           ),
@@ -85,7 +89,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               EasyDebounce.debounce(
                   'debouncer-edit-profile-about',
                   const Duration(milliseconds: 1500),
-                  () => debugPrint(about)
+                  () {
+                    debugPrint(about);
+                    editUser(null, null, about);
+                  }
               );
             },
           ),
