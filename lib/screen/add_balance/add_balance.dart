@@ -1,23 +1,28 @@
+import 'package:awesome_dropdown/awesome_dropdown.dart';
 import 'package:currency_picker/currency_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_calculator/flutter_dynamic_calculator.dart';
 import 'package:money_formatter/money_formatter.dart';
-import 'package:money_manager/models/transaction_model.dart';
-import 'package:money_manager/repository/firebase_transactions_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class AddBalanceScreen extends StatefulWidget {
-  const AddBalanceScreen({super.key});
+  final String type;
+  final Color color;
+  const AddBalanceScreen({super.key, required this.type, required this.color});
 
   @override
-  _AddBalanceScreenState createState() => _AddBalanceScreenState();
+  _AddBalanceScreenState createState() => _AddBalanceScreenState(type, color);
 }
+
 class _AddBalanceScreenState extends State<AddBalanceScreen>{
-  var _colorTypeButton = Colors.green;
-  var _textTypeButton = "Receitas";
   var _imageTypeButton = "icons/receita_icon.png";
-  double? _currentValue = 0;
+  double _currentValue = 0;
   var _currency = "BRL";
+  var _selectedItem = "";
+  _AddBalanceScreenState(this._textTypeButton, this._colorTypeButton);
+  late final String _textTypeButton;
+  late final Color _colorTypeButton;
 
   @override
   Widget build(BuildContext context) {
@@ -202,41 +207,82 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
               ],
             ),
           ),
-          Container(
-            constraints: const BoxConstraints(
-              maxHeight: double.infinity,
-            ),
-            color: Colors.grey,
-            child: const Text("teste")
+          buildAwesomeDropDown(),
+          const SizedBox(
+            height: 15,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                  child: Text(
-                    'Continuar',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
-                    )
-                  ),
-                ),
-                onPressed: (){
-                  debugPrint("Continuar");
-                  // addBalance();
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ),
+          buildContinuarButton(context),
         ],
       )
     );
+  }
+
+  Padding buildContinuarButton(BuildContext context) {
+    return Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: SizedBox(
+            height: 50,
+            width: 200,
+            child: ElevatedButton(
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                child: Text(
+                  'Continuar',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  )
+                ),
+              ),
+              onPressed: (){
+                debugPrint("Continuar");
+                addBalance(_currentValue);
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        );
+  }
+
+  Widget buildAwesomeDropDown() {
+    return Row(
+      children: [
+        SizedBox(
+          width: 200,
+          child: AwesomeDropDown(
+            dropDownBGColor: const Color.fromRGBO(48, 48, 56, 1.0),
+            dropDownOverlayBGColor: const Color.fromRGBO(48, 48, 56, 1.0),
+            selectedItemTextStyle:  const TextStyle(
+              color: Colors.grey,
+            ),
+            dropDownListTextStyle: const TextStyle(
+              color: Colors.grey,
+            ),
+            elevation: 5,
+            dropDownList: dropDownList(),
+            numOfListItemToShow: dropDownList().length,
+            dropDownIcon: const Icon(Icons.arrow_drop_down, color: Colors.grey, size: 23,),
+            selectedItem: _selectedItem,
+            onDropDownItemClick: (selectedItem) {
+              _selectedItem = selectedItem;
+            },
+          )
+        ),
+        const Spacer()
+      ],
+    );
+  }
+
+  List<String> dropDownList() {
+    return [
+      "Groceries",
+      "online Shopping",
+      "eating",
+      "bills",
+      "subscriptions",
+      "fees"
+    ];
   }
 
   Future showCalculatorBottomSheet() {
@@ -260,7 +306,10 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
         borderWidth: 0.0,
         displayCalculatorRadius: 10.0,
         displayBackgroundColor: Colors.white,
-        displayStyle: TextStyle(fontSize: 30, color: Colors.green),
+        displayStyle: TextStyle(
+          fontSize: 30,
+          color: Colors.green
+        ),
         expressionBackgroundColor: Colors.black12,
         expressionStyle: TextStyle(fontSize: 14, color: Colors.black45),
         operatorColor: Colors.green,
@@ -319,13 +368,16 @@ class _AddBalanceScreenState extends State<AddBalanceScreen>{
     return fmf.output.symbolOnLeft;
   }
 
-  void createTransactionInDB() async {
-    var userId = FirebaseAuth.instance.currentUser?.uid;
-    var transaction = Transactions(_currentValue!, _currency, _textTypeButton, userId!, null);
-    await createTransaction(transaction);
+  Future addBalance(double value) async {
+    if(value != 0) {
+      await createTransactionInDB();
+    }
   }
 
-  void addBalance() {
-    createTransactionInDB();
+  Future createTransactionInDB() async {
+    var userId = FirebaseAuth.instance.currentUser?.uid;
+    String uuid = const Uuid().v4();
+    // var transaction = TransactionModel(_currentValue, _currency, _textTypeButton, userId!, uuid);
+    // await createTransaction(transaction);
   }
 }
